@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose from 'mongoose';
 
 import User from './models/user.js';
@@ -17,7 +18,14 @@ const apiBaseUrl = codespaceName
 
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db';
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  ...(codespaceName ? [`https://${codespaceName}-5173.app.github.dev`] : []),
+];
+
 app.use(express.json());
+app.use(cors({ origin: allowedOrigins }));
 
 async function connectDatabase() {
   try {
