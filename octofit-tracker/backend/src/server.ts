@@ -64,7 +64,7 @@ app.get(['/api/workouts', '/api/workouts/'], async (_request, response) => {
 });
 
 connectDatabase().then(() => {
-  app.listen(port, () => {
+  app.listen(port, '0.0.0.0', () => {
     console.log(`OctoFit API listening on port ${port}`);
     console.log(`API Base URL: ${apiBaseUrl}`);
   });
